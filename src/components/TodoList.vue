@@ -1,6 +1,10 @@
 <template>
   <div class="allItems">
-    <div v-for="item in allItems" :key="item.id" :class="{ done: item.done }">
+    <div
+      v-for="item in allItems"
+      :key="item.id"
+      :class="{ done: item.done }"
+    >
       <TodoItem :item="item" />
     </div>
   </div>
@@ -19,9 +23,4 @@ export default {
   },
 };
 </script>
-<style>
-
-
-
-
-</style>
+<style></style>

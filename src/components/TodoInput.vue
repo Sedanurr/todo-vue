@@ -27,7 +27,8 @@ export default {
           this.addItem({
             id: v1(),
             title: this.itemTitle,
-            done : false
+            done : false,
+            showDialog : false
           });
           this.itemTitle = "";
         },
@@ -50,7 +51,7 @@ form label {
 }
 form input {
   flex-grow: 1;
-  border: 2px solid #f5af19;
+  border: 2px solid #002B5B;
   background: white;
   font-size: initial;
 }
@@ -59,7 +60,7 @@ form button {
   border: none;
   border-radius: 8px;
   height: 30px;
-  background: #f5af19;
+  background: #002B5B;
   color: white;
   text-transform: uppercase;
   font-weight: bold;
@@ -69,7 +70,7 @@ form button {
   transition: background 0.2s ease-out;
 }
 form button:hover {
-  background: #f5af19;
+  background: #002B5B;
 }
 form input,
 form button {

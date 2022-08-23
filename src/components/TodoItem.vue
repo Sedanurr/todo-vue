@@ -17,25 +17,37 @@
           type="button"
           aria-label="Delete"
           title="Delete"
-          @click="deleteItem(item.id)"
+          @click="toogle(item.id)"
         >
           <i aria-hidden="true" class="material-icons">delete</i>
         </button>
+
       </div>
     </li>
   </ul>
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
+
+  computed:{
+     ...mapGetters(["dialog"])
+  },
+
   props: {
     item: {},
   },
   methods: {
-    ...mapActions(["deleteItem"]),
     ...mapActions(["changeItemStatus"]),
+
+    toogle(id) {
+      this.$store.state.selectedId = id
+      this.$store.dispatch('showDialog',this.dialog)
+    }
+
+   
   },
 };
 </script>
@@ -64,7 +76,7 @@ export default {
   background: #fff;
   -webkit-appearance: none;
   cursor: pointer;
-  color: #f5af19;
+  color: #002b5b;
 }
 #todolist ul {
   margin-top: 2.6rem;
@@ -73,7 +85,7 @@ export default {
 #todolist li {
   display: flex;
   margin: 0 -3rem 4px;
-  padding: 1.1rem 3rem;
+  padding: 1.1rem 2rem;
   justify-content: space-between;
   align-items: center;
   background: rgba(255, 255, 255, 0.1);
@@ -90,7 +102,8 @@ export default {
   width: 0%;
   color: white;
   height: 1px;
-  background: #fff;
+  background: #000;
   animation: strikeitem 0.3s ease-out 0s forwards;
 }
+
 </style>
