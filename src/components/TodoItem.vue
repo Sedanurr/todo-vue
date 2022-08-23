@@ -1,7 +1,15 @@
 <template>
   <ul>
     <li :class="{ done: item.done }">
-      <span class="label">{{ item.title }}</span>
+      <span class="label" v-if="!editStatus">{{ item.title }}</span>
+      <input
+        type="text"
+        v-bind:value="editTitle"
+        @change="todoTextChange"
+        v-else
+        class="input"
+      />
+
       <div class="actions">
         <button
           class="btn-picto"
@@ -21,7 +29,17 @@
         >
           <i aria-hidden="true" class="material-icons">delete</i>
         </button>
-
+        <button
+          class="btn-picto"
+          type="button"
+          aria-label="Edit"
+          title="Edit"
+          @click="updateTask(item)"
+        >
+          <i aria-hidden="true" class="material-icons">{{
+            editStatus ? "update" : "edit"
+          }}</i>
+        </button>
       </div>
     </li>
   </ul>
@@ -31,9 +49,14 @@
 import { mapActions, mapGetters } from "vuex";
 
 export default {
-
-  computed:{
-     ...mapGetters(["dialog"])
+  computed: {
+    ...mapGetters(["dialog"]),
+  },
+  data() {
+    return {
+      editStatus: false,
+      editTitle: ""
+    };
   },
 
   props: {
@@ -42,8 +65,23 @@ export default {
   methods: {
     ...mapActions(["changeItemStatus"]),
     ...mapActions(["showDialog"]),
+    ...mapActions(["updateItem"]),
 
-   
+    todoTextChange(e) {
+      this.editTitle = e.target.value;
+    },
+
+    updateTask(item) {
+      this.editStatus = this.editStatus == true ? false : true;
+      if (this.editStatus) {
+        this.editTitle = item.title;
+        console.log(item.title)
+        this.updateItem(item);
+      }
+      else{
+        item.title = this.editTitle
+      }
+    },
   },
 };
 </script>
@@ -65,6 +103,12 @@ export default {
 #todolist .label {
   position: relative;
   transition: opacity 0.1s linear;
+}
+#todolist .input {
+  flex-grow: 1;
+  border: 2px solid #002b5b;
+  background: white;
+  font-size: initial;
 }
 
 #todolist .btn-picto {
@@ -101,5 +145,4 @@ export default {
   background: #000;
   animation: strikeitem 0.3s ease-out 0s forwards;
 }
-
 </style>

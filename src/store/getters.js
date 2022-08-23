@@ -1,8 +1,2 @@
-import Vue from "vue";
-import Vuex from "vuex";
-
-Vue.use(Vuex);
-export default new Vuex.Store({
-  getters: {
-  },
-});
+export const allItems = state => state.module.allItems
+export const dialog = state => state.module.dialog

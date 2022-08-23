@@ -13,10 +13,10 @@ export default new Vuex.Store({
       },
     ],
     selectedId:"",
-    showDialog:false
+    showDialog:false,
   },
   getters: {
-    allItems: (state) => state.items,
+    allItems: state => state.items,
     dialog(state) {
       return state.showDialog
     }
@@ -27,6 +27,9 @@ export default new Vuex.Store({
     },
     deleteItem({ commit }, id) {
       commit("delete_item", id);
+    },
+    updateItem({commit},item) {
+      commit("update_item",item)
     },
     changeItemStatus({ commit }, id) {
       commit("change_status", id);
@@ -45,17 +48,22 @@ export default new Vuex.Store({
     add_item(state, item) {
       state.items.push(item);
     },
-    toogle_dialog(state,id) {
-      state.showDialog = true
-      state.selectedId = id
-    },
     delete_item(state, id) {
       state.items=state.items.filter((item) => item.id != id)      
+    },
+    update_item(state,item){
+      let index = state.items.findIndex((i) => i.id == item.id)
+      console.log(index)
+
     },
     change_status(state, id) {
       state.items.done = state.items.filter((item) =>
         item.id == id ? (item.done = !item.done) : ""
       );
+    },
+    toogle_dialog(state,id) {
+      state.showDialog = true
+      state.selectedId = id
     },
     cancel(state,bool) {
       state.showDialog = !bool 
