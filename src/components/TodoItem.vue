@@ -17,7 +17,7 @@
           type="button"
           aria-label="Delete"
           title="Delete"
-          @click="toogle(item.id)"
+          @click="showDialog(item.id)"
         >
           <i aria-hidden="true" class="material-icons">delete</i>
         </button>
@@ -41,11 +41,7 @@ export default {
   },
   methods: {
     ...mapActions(["changeItemStatus"]),
-
-    toogle(id) {
-      this.$store.state.selectedId = id
-      this.$store.dispatch('showDialog',this.dialog)
-    }
+    ...mapActions(["showDialog"]),
 
    
   },

@@ -45,8 +45,9 @@ export default new Vuex.Store({
     add_item(state, item) {
       state.items.push(item);
     },
-    toogle_dialog(state,bool) {
-      state.showDialog = !bool
+    toogle_dialog(state,id) {
+      state.showDialog = true
+      state.selectedId = id
     },
     delete_item(state, id) {
       state.items=state.items.filter((item) => item.id != id)      
