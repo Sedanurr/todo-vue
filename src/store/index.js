@@ -15,7 +15,8 @@ export default new Vuex.Store({
     selectedId: "",
     showDialog: false,
     showDialogUpdate: false,
-    updateId: "",
+    selectedItem: "",
+    
   },
   getters: {
     allItems: (state) => state.items,
@@ -42,20 +43,17 @@ export default new Vuex.Store({
     cancel({ commit }, item) {
       commit("cancel", item);
     },
-    confirm({ commit }, item) {
-      commit("confirm", item);
+    cancelUpdate({ commit }, item) {
+      commit("cancelUpdate", item);
     },
-    cancelUpdate({commit},item) {
-      commit("cancelUpdate",item)
-    },
-    confirmUpdate({commit},item) {
-      commit("confirmUpdate",item)
+    confirmUpdate({ commit }, item) {
+      commit("confirmUpdate", item);
     },
     showDialog({ commit }, id) {
       commit("toogle_dialog", id);
     },
-    showDialogUpdate({ commit }, id) {
-      commit("update_dialog", id);
+    showDialogUpdate({ commit },id) {
+      commit("update_dialog",id);
     },
   },
   mutations: {
@@ -66,6 +64,7 @@ export default new Vuex.Store({
       state.items = state.items.filter((item) => item.id != id);
     },
     update_item(state, item) {
+      state.selectedItem = item;
       let index = state.items.findIndex((i) => i.id == item.id);
       console.log(index);
     },
@@ -78,21 +77,15 @@ export default new Vuex.Store({
       state.showDialog = true;
       state.selectedId = id;
     },
-    update_dialog(state, id) {
+    update_dialog(state,selectedItem) {
       state.showDialogUpdate = true;
-      state.updateId = id;
+      state.selectedItem = selectedItem
     },
     cancel(state, bool) {
       state.showDialog = !bool;
     },
     cancelUpdate(state, bool) {
       state.showDialogUpdate = !bool;
-    },
-    confirmUpdate(state, bool) {
-      state.showDialogUpdate = !bool;
-    },
-    confirm(state, bool) {
-      state.showDialog = !bool;
     },
   },
   modules: {},

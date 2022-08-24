@@ -9,7 +9,7 @@
         v-else
         class="input"
       />
-
+      {{ editStatus }}
       <div class="actions">
         <button
           class="btn-picto"
@@ -54,9 +54,18 @@ export default {
   },
   data() {
     return {
+      editTitle: "",
       editStatus: false,
-      editTitle: ""
     };
+  },
+  watch: {
+    "$store.state.showDialogUpdate": function (val) {
+      if (val == false) {
+        this.editStatus = false;
+      }
+    },
+
+
   },
 
   props: {
@@ -73,15 +82,13 @@ export default {
     },
 
     updateTask(item) {
-      this.editStatus = this.editStatus == true ? false : true;
-      if (this.editStatus) {
+      
+      if (!this.editStatus) {
+        this.editStatus = true;
         this.editTitle = item.title;
-        console.log(item.title)
-        this.updateItem(item);
-        this.showDialogUpdate(item.id)
-      }
-      else{
-        item.title = this.editTitle
+      } else {
+        item.title = this.editTitle;
+        this.showDialogUpdate(item);
       }
     },
   },
@@ -147,5 +154,4 @@ export default {
   background: #000;
   animation: strikeitem 0.3s ease-out 0s forwards;
 }
-
 </style>

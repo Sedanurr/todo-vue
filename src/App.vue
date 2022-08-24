@@ -31,24 +31,27 @@ export default {
   computed: {
     ...mapGetters(["dialog"]),
     ...mapGetters(["updateDialog"]),
+
   },
+  
 
   methods: {
     ...mapActions(["deleteItem", "updateItem", "changeDialog"]),
     confirm() {
       this.deleteItem(this.$store.state.selectedId);
-      this.cancel();
+      this.cancel()
+    },
+    cancel(){
+      this.$store.dispatch("cancel",this.$store.state.selectedId)
     },
     confirmUpdate() {
-      this.updateItem(this.$store.state.updateId);
-      this.cancelUpdate();
+      this.updateItem(this.$store.state.selectedItem)
+      console.log(this.$store.state.items)
+      this.cancelUpdate()
     },
-    cancelUpdate() {
-      this.$store.dispatch("cancelUpdate", this.$store.state.showDialogUpdate);
-    },
-    cancel() {
-      this.$store.dispatch("cancel", this.$store.state.showDialog);
-    },
+    cancelUpdate(){
+      this.$store.dispatch("cancelUpdate",this.$store.state.selectedItem)
+    }
   },
 };
 </script>
