@@ -66,6 +66,7 @@ export default {
     ...mapActions(["changeItemStatus"]),
     ...mapActions(["showDialog"]),
     ...mapActions(["updateItem"]),
+    ...mapActions(["showDialogUpdate"]),
 
     todoTextChange(e) {
       this.editTitle = e.target.value;
@@ -77,6 +78,7 @@ export default {
         this.editTitle = item.title;
         console.log(item.title)
         this.updateItem(item);
+        this.showDialogUpdate(item.id)
       }
       else{
         item.title = this.editTitle
@@ -145,4 +147,5 @@ export default {
   background: #000;
   animation: strikeitem 0.3s ease-out 0s forwards;
 }
+
 </style>
