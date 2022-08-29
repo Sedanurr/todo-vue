@@ -2,39 +2,58 @@
   <div>
     <form @submit.prevent="addTodoI">
       <label for="newitem">Add new task!</label>
-      <input type="text" v-bind:value="itemTitle" @change="titleChange"/>
+      <input
+        type="text"
+        v-model.trim="$v.itemTitle.$model"
+        @change="titleChange"
+        :class="{ 'is-invalid': validationStatus($v.itemTitle) }"
+      />
+      <div v-if="!$v.itemTitle.required" class="invalid-feedback">
+        *The title is required
+      </div>
       <button type="submit">Add item</button>
     </form>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import {v1} from "uuid"
+import { mapActions } from "vuex";
+import { v1 } from "uuid";
+import { required } from "vuelidate/lib/validators";
 
 export default {
-    data() {
-        return {
-            itemTitle: ""
-        }
+  data() {
+    return {
+      itemTitle: "",
+    };
+  },
+  validations: {
+    itemTitle: { required },
+  },
+  methods: {
+    ...mapActions(["addItem"], ["showDialogNull"]),
+    validationStatus: function (validation) {
+      return typeof validation != "undefined" ? validation.$error : false;
     },
-    methods: {
-        ...mapActions(["addItem"]),
-        titleChange(e) {
-          this.itemTitle = e.target.value
-        },
-        addTodoI() {
-          this.addItem({
-            id: v1(),
-            title: this.itemTitle,
-            done : false,
-            showDialog : false
-          });
-          this.itemTitle = "";
-        },
-      
-        
-    }
+    titleChange(e) {
+      this.itemTitle = e.target.value;
+    },
+    addTodoI() {
+      if (this.itemTitle == "") {
+        this.$v.$touch();
+      } else {
+        this.addItem({
+          id: v1(),
+          title: this.itemTitle,
+          done: false,
+          showDialog: false,
+        });
+        this.itemTitle = "";
+      }
+
+     
+    },
+  },
 };
 </script>
 
@@ -51,7 +70,7 @@ form label {
 }
 form input {
   flex-grow: 1;
-  border: 2px solid #002B5B;
+  border: 2px solid #002b5b;
   background: white;
   font-size: initial;
 }
@@ -60,7 +79,7 @@ form button {
   border: none;
   border-radius: 8px;
   height: 30px;
-  background: #002B5B;
+  background: #002b5b;
   color: white;
   text-transform: uppercase;
   font-weight: bold;
@@ -70,7 +89,7 @@ form button {
   transition: background 0.2s ease-out;
 }
 form button:hover {
-  background: #002B5B;
+  background: #002b5b;
 }
 form input,
 form button {

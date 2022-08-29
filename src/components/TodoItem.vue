@@ -9,7 +9,6 @@
         v-else
         class="input"
       />
-      {{ editStatus }}
       <div class="actions">
         <button
           class="btn-picto"
