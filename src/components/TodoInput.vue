@@ -7,6 +7,7 @@
         v-model.trim="$v.itemTitle.$model"
         @change="titleChange"
         :class="{ 'is-invalid': validationStatus($v.itemTitle) }"
+        class="form-control"
       />
       <div v-if="!$v.itemTitle.required" class="invalid-feedback">
         *The title is required
