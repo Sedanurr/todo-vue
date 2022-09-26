@@ -1,11 +1,5 @@
 const state = {
-    items: [
-      {
-        id: 1,
-        title: "deneme",
-        done: false,
-      },
-    ],
+    items: [],
     selectedId: "",
     showDialog: false,
     showDialogUpdate: false,

@@ -1,5 +1,5 @@
 <template>
-  <ul>
+  <ul class="mt-1 ml-3">
     <li :class="{ done: item.done }">
       <span class="label" v-if="!editStatus">{{ item.title }}</span>
       <input
@@ -125,10 +125,6 @@ export default {
   -webkit-appearance: none;
   cursor: pointer;
   color: #002b5b;
-}
-#todolist ul {
-  margin-top: 2.6rem;
-  list-style: none;
 }
 #todolist li {
   display: flex;

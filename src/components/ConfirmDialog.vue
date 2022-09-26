@@ -1,5 +1,5 @@
 <template>
-  <div v-show="show" class="overlay">
+  <div v-if="show" class="overlay">
     <div class="dialog">
       <div class="dialog__content">
         <h2 class="dialog__title" v-text="title"></h2>

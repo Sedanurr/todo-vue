@@ -106,7 +106,8 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 2.5rem;
-  max-width: 100%;
+  max-width: 80%;
+  border:solid 1px #002b5b;
   width: 24rem;
 }
 .dialog__content {

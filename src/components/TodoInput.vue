@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <form @submit.prevent="addTodoI">
-      <label for="newitem">Add new task!</label>
+  <div class="mt-3" >
+    <form @submit.prevent="addTodoI" class="d-flex flex-wrap">
+      <label for="newitem" class="w-100">Add new task!</label>
       <input
         type="text"
         v-model.trim="$v.itemTitle.$model"
@@ -12,7 +12,7 @@
       <div v-if="!$v.itemTitle.required" class="invalid-feedback">
         *The title is required
       </div>
-      <button type="submit">Add item</button>
+      <button type="submit" class="w-30 h-3 mt-2 ml-0">Add item</button>
     </form>
   </div>
 </template>
@@ -59,13 +59,7 @@ export default {
 </script>
 
 <style scoped>
-form {
-  margin-top: 3rem;
-  display: flex;
-  flex-wrap: wrap;
-}
 form label {
-  min-width: 80%;
   margin-bottom: 0.5rem;
   font-size: 1rem;
 }
@@ -76,25 +70,18 @@ form input {
   font-size: initial;
 }
 form button {
-  padding: 2px;
+  padding: 1px;
   border: none;
   border-radius: 8px;
-  height: 30px;
   background: #002b5b;
   color: white;
-  text-transform: uppercase;
-  font-weight: bold;
-  margin: 0px 1px 0px 5px;
+  font-size: large;
   border: 1px solid rgba(255, 255, 255, 0.3);
   cursor: pointer;
   transition: background 0.2s ease-out;
+  font-family: "Quicksand", sans-serif;
 }
 form button:hover {
   background: #002b5b;
-}
-form input,
-form button {
-  font-family: "Quicksand", sans-serif;
-  height: 3rem;
 }
 </style>
