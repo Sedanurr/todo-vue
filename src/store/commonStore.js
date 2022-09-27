@@ -3,7 +3,6 @@ const state = {
     selectedId: "",
     showDialog: false,
     showDialogUpdate: false,
-    showDialogNull:false,
     selectedItem: "",
   };
   const getters = {
@@ -13,9 +12,6 @@ const state = {
     },
     updateDialog(state) {
       return state.showDialogUpdate;
-    },
-    nullDialog(state) {
-      return state.showDialogNull;
     }
   };
   const actions = {
@@ -45,9 +41,6 @@ const state = {
     },
     showDialogUpdate({ commit }, id) {
       commit("update_dialog", id);
-    },
-    showDialogNull({commit}) {
-      commit("null_dialog")
     }
   };
   const mutations = {
@@ -74,9 +67,6 @@ const state = {
     update_dialog(state, selectedItem) {
       state.showDialogUpdate = true;
       state.selectedItem = selectedItem;
-    },
-    null_dialog(state) {
-      state.showDialogNull = true;
     },
     cancel(state, bool) {
       state.showDialog = !bool;

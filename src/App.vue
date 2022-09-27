@@ -16,13 +16,6 @@
       title="Update a task"
       description="Are you sure you want to update this task?"
     />
-    <ConfirmDialog
-      :show="nullDialog"
-      :cancel="cancel"
-      :confirm="confirm"
-      title="Null item"
-      description="You didn't add a null item"
-    />
     <TodoInput />
   </main>
 </template>
@@ -38,7 +31,6 @@ export default {
   computed: {
     ...mapGetters(["dialog"]),
     ...mapGetters(["updateDialog"]),
-    ...mapGetters(["nullDialog"])
 
   },
   
