@@ -26,21 +26,6 @@ const state = {
     },
     changeItemStatus({ commit }, id) {
       commit("change_status", id);
-    },
-    cancel({ commit }, item) {
-      commit("cancel", item);
-    },
-    cancelUpdate({ commit }, item) {
-      commit("cancelUpdate", item);
-    },
-    confirmUpdate({ commit }, item) {
-      commit("confirmUpdate", item);
-    },
-    showDialog({ commit }, id) {
-      commit("toogle_dialog", id);
-    },
-    showDialogUpdate({ commit }, id) {
-      commit("update_dialog", id);
     }
   };
   const mutations = {
@@ -59,21 +44,7 @@ const state = {
       state.items.done = state.items.filter((item) =>
         item.id == id ? (item.done = !item.done) : ""
       );
-    },
-    toogle_dialog(state, id) {
-      state.showDialog = true;
-      state.selectedId = id;
-    },
-    update_dialog(state, selectedItem) {
-      state.showDialogUpdate = true;
-      state.selectedItem = selectedItem;
-    },
-    cancel(state, bool) {
-      state.showDialog = !bool;
-    },
-    cancelUpdate(state, bool) {
-      state.showDialogUpdate = !bool;
-    },
+    }
   };
   export default {
     state,

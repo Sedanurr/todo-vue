@@ -1,57 +1,20 @@
 <template>
   <main id="todolist">
-    <h1>Todo List</h1>
-    <TodoList />
-    <ConfirmDialog
-      :show="dialog"
-      :cancel="cancel"
-      :confirm="confirm"
-      title="Delete a task"
-      description="Are you sure you want to delete this task?"
-    />
-    <ConfirmDialog
-      :show="updateDialog"
-      :cancel="cancelUpdate"
-      :confirm="confirmUpdate"
-      title="Update a task"
-      description="Are you sure you want to update this task?"
-    />
-    <TodoInput />
+    <TodoIndex />
+    <ConfirmDialog />
   </main>
 </template>
 
 <script>
-import TodoList from "./components/TodoList.vue";
-import TodoInput from "./components/TodoInput.vue";
-import ConfirmDialog from "./components/ConfirmDialog.vue";
-import { mapActions, mapGetters } from "vuex";
-
+import ConfirmDialog from "./components/modal/ConfirmDialog.vue";
+import TodoIndex from "./components/todo/todoIndex.vue";
 export default {
-  components: { TodoList, TodoInput, ConfirmDialog },
-  computed: {
-    ...mapGetters(["dialog"]),
-    ...mapGetters(["updateDialog"]),
+  components: { ConfirmDialog, TodoIndex },
 
-  },
-  
-
-  methods: {
-    ...mapActions(["deleteItem", "updateItem", "changeDialog"]),
-    confirm() {
-      this.deleteItem(this.$store.state.selectedId);
-      this.cancel()
-    },
-    cancel(){
-      this.$store.dispatch("cancel",this.$store.state.selectedId)
-    },
-    confirmUpdate() {
-      this.updateItem(this.$store.state.selectedItem)
-      console.log(this.$store.state.items)
-      this.cancelUpdate()
-    },
-    cancelUpdate(){
-      this.$store.dispatch("cancelUpdate",this.$store.state.selectedItem)
-    }
+  data() {
+    return {
+      showModal: true,
+    };
   },
 };
 </script>
@@ -99,7 +62,7 @@ body {
   margin-right: auto;
   margin-top: 2.5rem;
   max-width: 80%;
-  border:solid 1px #002b5b;
+  border: solid 1px #002b5b;
   width: 24rem;
 }
 .dialog__content {

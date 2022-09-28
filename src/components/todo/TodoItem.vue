@@ -24,7 +24,7 @@
           type="button"
           aria-label="Delete"
           title="Delete"
-          @click="showDialog(item.id)"
+          @click="deleteTodo"
         >
           <i aria-hidden="true" class="material-icons">delete</i>
         </button>
@@ -33,7 +33,7 @@
           type="button"
           aria-label="Edit"
           title="Edit"
-          @click="updateTask(item)"
+          @click="editTask(item)"
         >
           <i aria-hidden="true" class="material-icons">{{
             editStatus ? "update" : "edit"
@@ -57,37 +57,43 @@ export default {
       editStatus: false,
     };
   },
-  watch: {
-    "$store.state.showDialogUpdate": function (val) {
-      if (val == false) {
-        this.editStatus = false;
-      }
-    },
-
-
-  },
-
   props: {
     item: {},
   },
   methods: {
     ...mapActions(["changeItemStatus"]),
-    ...mapActions(["showDialog"]),
-    ...mapActions(["updateItem"]),
-    ...mapActions(["showDialogUpdate"]),
+    ...mapActions(["updateItem"], ["deleteItem"]),
+
+    deleteTodo() {
+      this.$modal.open({
+        confirm: () => {
+          this.$store.dispatch("deleteItem", this.item.id);
+        },
+        title: "Delete todo",
+        content: "Are you sure delete the todo?",
+        confirmText: "Delete",
+      });
+    },
 
     todoTextChange(e) {
       this.editTitle = e.target.value;
     },
 
-    updateTask(item) {
-      
+    editTask(item) {
       if (!this.editStatus) {
         this.editStatus = true;
         this.editTitle = item.title;
       } else {
         item.title = this.editTitle;
-        this.showDialogUpdate(item);
+        this.$modal.open({
+          confirm: () => {
+            this.$store.dispatch("updateItem", item);
+            this.editStatus = false
+          },
+          title: "Edit Todo",
+          content: "Are you sure edit the todo",
+          confirmText: "Edit",
+        });
       }
     },
   },
