@@ -43,9 +43,8 @@ export default {
         content: "Content",
         confirmText: "Confirm",
         cancelText: "Cancel",
-        props: {},
       },
-      component: () => {},
+
     };
   },
   created() {
