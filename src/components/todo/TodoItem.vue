@@ -13,7 +13,7 @@
         <button
           class="btn-picto"
           type="button"
-          @click="changeItemStatus(item.id)"
+          @click="$store.dispatch('TodoModule/changeItemStatus',item.id)"
         >
           <i aria-hidden="true" class="material-icons">{{
             item.done ? "check_box" : "check_box_outline_blank"
@@ -45,12 +45,9 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
 
 export default {
-  computed: {
-    ...mapGetters(["dialog"]),
-  },
+
   data() {
     return {
       editTitle: "",
@@ -61,13 +58,10 @@ export default {
     item: {},
   },
   methods: {
-    ...mapActions(["changeItemStatus"]),
-    ...mapActions(["updateItem"], ["deleteItem"]),
-
     deleteTodo() {
       this.$modal.open({
         confirm: () => {
-          this.$store.dispatch("deleteItem", this.item.id);
+          this.$store.dispatch("TodoModule/deleteItem", this.item.id);
         },
         title: "Delete todo",
         content: "Are you sure delete the todo?",
@@ -87,11 +81,11 @@ export default {
         item.title = this.editTitle;
         this.$modal.open({
           confirm: () => {
-            this.$store.dispatch("updateItem", item);
+            this.$store.dispatch("TodoModule/updateItem", item);
             this.editStatus = false
           },
           title: "Edit Todo",
-          content: "Are you sure edit the todo",
+          content: "Are you sure edit the todo?",
           confirmText: "Edit",
         });
       }

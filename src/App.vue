@@ -1,15 +1,15 @@
 <template>
   <main id="todolist">
     <TodoIndex />
-    <ConfirmDialog />
+    <Modal />
   </main>
 </template>
 
 <script>
-import ConfirmDialog from "./components/modal/ConfirmDialog.vue";
-import TodoIndex from "./components/todo/todoIndex.vue";
+import Modal from "./components/modal/Modal.vue";
+import TodoIndex from "./components/todo/";
 export default {
-  components: { ConfirmDialog, TodoIndex },
+  components: { Modal, TodoIndex },
 
   data() {
     return {
@@ -55,121 +55,30 @@ body {
   margin-top: 0.2rem;
 }
 .dialog {
-  --tw-bg-opacity: 1;
-  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
-  border-radius: 0.75rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 2.5rem;
-  max-width: 80%;
-  border: solid 1px #002b5b;
-  width: 24rem;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
 }
-.dialog__content {
-  padding-left: 0.75rem;
-  padding-right: 0.75rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+.dialog__wrapper {
+  display: table-cell;
+  vertical-align: middle;
 }
-.dialog__title {
-  font-weight: 500;
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-  margin-bottom: 0.5rem;
-  --tw-text-opacity: 1;
-  color: rgba(17, 24, 39, var(--tw-text-opacity));
+.dialog__container {
+  width: 300px;
+  margin: 0px auto;
+  padding: 15px 20px;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: #002b5b;
+  transition: all 0.3s ease;
 }
-.dialog__description {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin-bottom: 1rem;
-  --tw-text-opacity: 1;
-  color: rgba(107, 114, 128, var(--tw-text-opacity));
-}
-.dialog__footer {
-  display: flex;
-  justify-content: flex-end;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.dialog__cancel {
-  border-radius: 0.75rem;
-  font-weight: 500;
-  margin-right: 1rem;
-}
-.dialog__cancel:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-.dialog__cancel {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.dialog__cancel:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
-    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgba(75, 85, 99, var(--tw-ring-opacity));
-  --tw-ring-opacity: 0.5;
-}
-.dialog__cancel {
-  --tw-text-opacity: 1;
-  color: rgba(17, 24, 39, var(--tw-text-opacity));
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.dialog__cancel:hover {
-  --tw-text-opacity: 1;
-  color: rgba(55, 65, 81, var(--tw-text-opacity));
-}
-.dialog__confirm {
-  --tw-bg-opacity: 1;
-  background-color: rgba(254, 226, 226, var(--tw-bg-opacity));
-  border-radius: 0.75rem;
-  font-weight: 500;
-  margin-right: 1rem;
-}
-.dialog__confirm:focus {
-  outline: 2px solid transparent;
-  outline-offset: 2px;
-}
-.dialog__confirm {
-  padding-top: 0.75rem;
-  padding-bottom: 0.75rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-.dialog__confirm:focus {
-  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0
-    var(--tw-ring-offset-width) var(--tw-ring-offset-color);
-  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0
-    calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
-  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow),
-    var(--tw-shadow, 0 0 #0000);
-  --tw-ring-opacity: 1;
-  --tw-ring-color: rgba(220, 38, 38, var(--tw-ring-opacity));
-  --tw-ring-opacity: 0.5;
-}
-.dialog__confirm {
-  --tw-text-opacity: 1;
-  color: rgba(220, 38, 38, var(--tw-text-opacity));
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-.dialog__confirm:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgba(252, 165, 165, var(--tw-bg-opacity));
-  --tw-text-opacity: 1;
-  color: rgba(153, 27, 27, var(--tw-text-opacity));
+.dialog__body {
+  margin: 20px 0;
 }
 </style>

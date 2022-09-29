@@ -18,10 +18,8 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { v1 } from "uuid";
 import { required } from "vuelidate/lib/validators";
-
 export default {
   data() {
     return {
@@ -32,7 +30,6 @@ export default {
     itemTitle: { required },
   },
   methods: {
-    ...mapActions(["addItem"], ["showDialogNull"]),
     validationStatus: function (validation) {
       return typeof validation != "undefined" ? validation.$error : false;
     },
@@ -43,11 +40,11 @@ export default {
       if (this.itemTitle == "") {
         this.$v.$touch();
       } else {
-        this.addItem({
+
+       this.$store.dispatch('TodoModule/addItem',{
           id: v1(),
           title: this.itemTitle,
           done: false,
-          showDialog: false,
         });
         this.itemTitle = "";
       }

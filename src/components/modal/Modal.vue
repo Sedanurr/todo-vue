@@ -1,26 +1,28 @@
 <template>
   <div v-if="show" class="overlay">
     <div class="dialog">
-      <div class="dialog__content">
-        <div>
-          <h2>{{ modalConfig.title }}</h2>
+      <div class="dialog__wrapper">
+        <div class="dialog__container">
+          <div class="dialog__header">
+            <h2>{{ modalConfig.title }}</h2>
+          </div>
+          <div class="dialog__body">
+            <span>{{ modalConfig.content }}</span>
+          </div>
+
+          <hr />
+
+          <div class="dialog__footer">
+            <div class="ml-5">
+              <button @click="cancel" class="btn btn-outline-secondary mr-2">
+                {{ modalConfig.cancelText }}
+              </button>
+              <button @click="confirm" class="btn btn-outline-danger">
+                {{ modalConfig.confirmText }}
+              </button>
+            </div>
+          </div>
         </div>
-        <div>
-          <span v-if="!component">{{ modalConfig.content }}</span>
-          <component :is="component" v-bind="modalConfig.props"></component>
-
-        </div>
-      </div>
-
-      <hr />
-
-      <div class="dialog__footer" v-if="!component">
-        <button @click="cancel" class="dialog__cancel">
-          {{ modalConfig.cancelText }}
-        </button>
-        <button @click="confirm" class="dialog__confirm">
-          {{ modalConfig.confirmText }}
-        </button>
       </div>
     </div>
   </div>
@@ -61,8 +63,6 @@ export default {
       content,
       confirmText,
       cancelText,
-      component,
-      props,
     }) {
       this.show = true;
       this.modalConfig.title = title ?? this.modalConfig.title;
@@ -70,8 +70,6 @@ export default {
       this.modalConfig.confirmText =
         confirmText ?? this.modalConfig.confirmText;
       this.modalConfig.cancelText = cancelText ?? this.modalConfig.cancelText;
-      this.component = component;
-      this.modalConfig.props = props;
       this.confirmResolver = confirm;
     },
     cancel() {
