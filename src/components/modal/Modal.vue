@@ -31,10 +31,8 @@
 <script>
 import Vue from "vue";
 export default {
-  name: "ConfirmDialog",
-  props: {
-    msg: String,
-  },
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "Modal",
   data() {
     return {
       show: false,

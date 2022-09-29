@@ -13,7 +13,7 @@
         <button
           class="btn-picto"
           type="button"
-          @click="$store.dispatch('TodoModule/changeItemStatus',item.id)"
+          @click="changeStatus"
         >
           <i aria-hidden="true" class="material-icons">{{
             item.done ? "check_box" : "check_box_outline_blank"
@@ -71,6 +71,17 @@ export default {
 
     todoTextChange(e) {
       this.editTitle = e.target.value;
+    },
+    changeStatus() {
+      this.$modal.open({
+        confirm: () => {
+          this.$store.dispatch('TodoModule/changeItemStatus',this.item.id)
+        },
+        title:'Change Status',
+        content: "Are you sure completed the todo?",
+        confirmText:'Completed'
+      })
+
     },
 
     editTask(item) {
